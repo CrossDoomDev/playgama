@@ -1,0 +1,12 @@
+{
+  "platforms": {
+    "playgama": {
+      "options": {}
+    }
+  },
+  "leaderboards": [
+    {
+      "id": "editorExperience"
+    }
+  ]
+}
