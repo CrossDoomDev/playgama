@@ -1,0 +1,42 @@
+.cosmetic-tabs{display:flex;gap:10px;margin:22px 0 16px;flex-wrap:wrap}
+.cosmetic-tabs button{display:flex;align-items:center;gap:10px;padding:11px 18px;font-weight:600}
+.cosmetic-tabs button span{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:50%;background:#ffffff16;font-size:12px}
+.cosmetic-tabs button.selected{background:var(--theme-accent,#5ed789);color:var(--theme-accent-ink,#0c2c1b);border-color:var(--theme-accent,#5ed789)}
+.cosmetic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-bottom:12px}
+.cosmetic-card{min-width:0;overflow:hidden;border:1px solid var(--theme-border,#395c80);background:var(--theme-panel,#142c45);border-radius:12px;display:flex;flex-direction:column}
+.cosmetic-card.equipped{border-color:var(--theme-accent,#5ee291);box-shadow:0 0 0 1px var(--theme-accent,#5ee291)}
+.cosmetic-preview{position:relative;height:178px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#315574,#0a1424);border-bottom:1px solid var(--theme-border,#395c80)}
+.cosmetic-card-copy{display:flex;flex-direction:column;gap:9px;padding:17px;flex:1}
+.cosmetic-card h3{font-size:19px;line-height:1.25;margin:0}
+.cosmetic-card p{font-size:13px;color:var(--theme-muted,#b3c9df);line-height:1.5;margin:0 0 7px}
+.cosmetic-status{color:var(--theme-accent,#7ddaaa);font-size:11px}
+.cosmetic-card button{width:100%;margin-top:auto;font-size:13px;padding:10px}
+.avatar-preview{display:grid;place-items:center;background:radial-gradient(ellipse,#567087,#1a2c40)}
+.avatar-preview img{height:150px;width:150px;object-fit:cover;border-radius:50%;border:3px solid #dae8f1;box-shadow:0 5px 20px #0007}
+.hands-preview{display:flex;justify-content:center;align-items:flex-start;gap:3px;padding:8px 22px 0;background:repeating-linear-gradient(90deg,transparent 0 27px,#7186a023 28px 29px),linear-gradient(#26394f,#090f1c)}
+.hands-preview img{height:202px;width:47%;object-fit:contain;object-position:top;filter:drop-shadow(0 3px 4px #0008)}
+.theme-preview{padding:17px 20px 25px;background:linear-gradient(135deg,var(--sample-panel),color-mix(in srgb,var(--sample-accent) 25%,var(--sample-panel)))}
+.sample-top{display:flex;gap:6px;height:20px;margin-bottom:9px}
+.sample-top>i,.sample-top>b{display:block;background:var(--sample-panel);border:1px solid color-mix(in srgb,var(--sample-accent) 50%,transparent);border-radius:3px}
+.sample-top>i{width:36%}.sample-top>b{width:29%}
+.sample-desk{display:flex;gap:9px;height:105px}
+.sample-desk>aside{width:20%;padding:9px 5px;background:var(--sample-panel);border-radius:3px}
+.sample-desk aside i{display:block;height:5px;margin-bottom:9px;background:var(--sample-accent);border-radius:2px}
+.sample-screen{flex:1;min-width:0}
+.sample-head{height:12px;background:var(--sample-panel);border-radius:4px 4px 0 0}
+.sample-paper{height:63px;padding:10px;background:var(--sample-paper);border-radius:0 0 3px 3px}
+.sample-paper b,.sample-paper i{display:block;width:80%;height:4px;background:color-mix(in srgb,var(--sample-panel) 70%,var(--sample-accent));margin-bottom:6px;border-radius:2px}
+.sample-paper b{width:60%;height:6px}.sample-paper em{display:block;height:7px;width:95%;background:var(--sample-accent);border-radius:2px}
+.sample-keyboard{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;padding:4px;background:var(--sample-panel);margin-top:5px;border-radius:3px}
+.sample-keyboard i{height:4px;border-radius:1px;background:var(--sample-paper);opacity:.8}
+.sample-keyboard i:nth-child(12){background:var(--sample-accent);opacity:1}
+.theme-swatches{position:absolute;right:12px;bottom:9px;display:flex;gap:4px}
+.theme-swatches i{width:11px;height:11px;border:1px solid #fff8;border-radius:50%}
+@media(min-width:1700px){.cosmetic-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.cosmetic-preview{height:190px}}
+@media(max-width:1100px){.cosmetic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.cosmetic-grid{grid-template-columns:1fr}.cosmetic-tabs{gap:6px}.cosmetic-tabs button{padding:8px 9px;font-size:12px}}
+
+/* Preview PNGs already contain the connected silhouette alpha. */
+
+.hands-preview img[data-hand-skin] { opacity:0; }
+.hands-preview img[data-material-ready="true"] { opacity:1; }

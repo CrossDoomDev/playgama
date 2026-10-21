@@ -1,0 +1,4 @@
+.development-badge { margin-left: 12px; color: #ffda95; font-size: 12px; white-space: nowrap; }
+@media (max-width: 700px) {
+  .development-badge { margin-left: 6px; font-size: 10px; }
+}

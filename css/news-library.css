@@ -1,0 +1,22 @@
+.news-shelf{margin:0 0 30px}
+.news-shelf-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;margin:12px 0 15px}
+.news-shelf-heading h3{margin:0;font-size:21px}
+.news-shelf-heading>span{font-size:12px;color:var(--theme-muted,#b3c9df)}
+.news-card{align-items:flex-start}
+.news-card-content{min-width:0;flex:1}
+.news-meta{display:flex;gap:6px 12px;flex-wrap:wrap;margin:10px 0;font-size:11px;color:var(--theme-muted,#b3c9df)}
+.news-full-text{margin:12px 0;font-size:13px}
+.news-full-text summary{cursor:pointer;color:var(--theme-accent,#83d8b0)}
+.news-full-text p{line-height:1.6;overflow-wrap:anywhere}
+.news-requirements{font-size:11px!important}
+.news-layout article{display:flex;flex-direction:column;min-height:0}
+.news-layout h2{flex:none}
+.news-layout #source-text{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 12px 10px 0;scrollbar-width:thin;scrollbar-color:#819ab1 transparent;overflow-wrap:anywhere}
+@media(max-width:650px){.news-card{gap:12px;padding:15px}.news-card>img{width:48px;height:60px}.news-shelf-heading h3{font-size:19px}}
+
+/* The article is a blank manuscript, filled only by the player's input. */
+.news-layout #source-text{white-space:pre-wrap}
+.article-mistake{color:#a21c2d;background:#ffe1e6;border-radius:2px}
+.article-caret{display:inline-block;width:0;height:1em;border-left:2px solid var(--theme-caret,#278af6);vertical-align:-.15em;animation:manuscript-caret 1s steps(1) infinite}
+@keyframes manuscript-caret{50%{border-color:transparent}}
+@media(prefers-reduced-motion:reduce){.article-caret{animation:none}}

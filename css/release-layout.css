@@ -1,0 +1,65 @@
+/* Release viewport: the playable area never exceeds a 2:1 aspect ratio. */
+:root{--game-vw:min(1vw,2vh);--game-vh:min(1vh,2vw)}
+html,body{width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{display:grid;place-items:center;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#app{width:calc(var(--game-vw)*100);height:calc(var(--game-vh)*100);min-height:0;transform:translateZ(0)}
+#main{min-height:0}
+.desk-layout{height:100%;display:flex;flex-direction:column}
+.monitor{min-height:0;flex:1;height:auto!important}
+.keyboard-wrap{flex:none;margin-top:16px;margin-bottom:8px;height:var(--keyboard-height)}
+.paper-sheet{min-height:0;height:calc(100% - clamp(40px,6.3 * var(--game-vh),70px))}
+.task-head{flex-shrink:0;gap:8px}
+.task-head>span{min-width:0}
+.task-head>span:first-child{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.task-number{flex-shrink:0}
+.lesson-copy{overflow:auto;max-height:100%}
+.article-layout article{display:flex;flex-direction:column;min-height:0}
+.lesson-copy{min-height:0}
+.lesson-start{flex-wrap:wrap;gap:6px}
+.page-panel{min-height:0;max-height:100%;overflow:auto}
+.story{max-height:88%;overflow:auto;align-items:center}
+.story img{margin-top:0;flex-shrink:0}
+.start-card{max-height:94%;overflow:auto}
+.task-sidebar{max-height:calc(var(--game-vh)*85);overflow:auto}
+#nav .desk-sticky{pointer-events:none}
+button,input{touch-action:manipulation}
+@media(max-width:1050px){.desk-layout{display:flex}.keyboard-wrap{margin-top:12px}.paper-sheet{height:calc(100% - 48px)}}
+@media(max-width:780px){
+#app{min-height:0}
+#header{height:120px}
+#main{top:205px;bottom:10px}
+#nav{top:132px}
+.monitor{padding-bottom:6px}
+.paper-sheet{height:calc(100% - 42px);padding:10px}
+.home-row-guide{margin:8px 0;padding-top:6px}
+.home-row-guide b{font-size:22px}
+.lesson-footnote{font-size:11px}
+.article-layout h2{font-size:18px;margin-bottom:8px}
+#typing-text{font-size:16px;max-height:48px;overflow:hidden}
+.typing-strip{margin-top:6px}
+.keyboard-wrap{margin-top:8px;margin-bottom:0}
+.mobile-note{display:none}
+.page-panel{height:100%;min-height:0}
+.story{bottom:5%;max-height:90%;padding:18px}
+.story img{width:90px;height:110px;margin:0}
+.story p{font-size:15px;margin:10px 0}
+.start-card{top:4%;max-height:92%}
+}
+@media(max-height:600px) and (min-width:781px){
+#header{height:62px;min-height:0}
+#main{top:82px}
+.hud-card{min-height:58px}
+.profile-details>b{font-size:12px}
+.profile-details>span{font-size:10px}
+.profile-level progress{height:7px}
+.home-row-guide{margin:6px 0;padding-top:5px}
+.home-row-guide b{font-size:22px}
+.lesson-footnote{font-size:11px}
+.paper-sheet{padding:10px}
+#typing-text{min-height:22px;max-height:42px;font-size:15px}
+.typing-strip{margin-top:4px;padding:4px 8px}
+.article-layout h2{font-size:18px;margin-bottom:6px}
+.article-illustration{display:none}
+#nav .desk-sticky{display:none}
+}
+.leaderboard-table{width:100%;border-collapse:collapse;text-align:left}.leaderboard-table th,.leaderboard-table td{padding:10px 8px;border-bottom:1px solid #9ab1c5}.leaderboard-table td:nth-child(2){overflow-wrap:anywhere}

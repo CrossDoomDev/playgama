@@ -1,0 +1,30 @@
+/* Stable finger zones follow Keyboard's physical key-to-finger mapping.
+   ID specificity keeps this optional teaching aid consistent across shop themes. */
+[data-zone="pinky"],#keyboard.finger-colors .key[data-finger$="-pinky"]{--finger-color:#f1a12d}
+[data-zone="ring"],#keyboard.finger-colors .key[data-finger$="-ring"]{--finger-color:#f4dd48}
+[data-zone="middle"],#keyboard.finger-colors .key[data-finger$="-middle"]{--finger-color:#55b5f3}
+[data-zone="left-index"],#keyboard.finger-colors .key[data-finger="left-index"]{--finger-color:#ff9162}
+[data-zone="right-index"],#keyboard.finger-colors .key[data-finger="right-index"]{--finger-color:#8bd55a}
+[data-zone="thumb"],#keyboard.finger-colors .key[data-finger$="-thumb"]{--finger-color:#c7cfda}
+#keyboard.finger-colors .key{
+ background:linear-gradient(145deg,color-mix(in srgb,var(--finger-color) 72%,white),var(--finger-color));
+ color:#18212d;text-shadow:none;
+ border-color:color-mix(in srgb,var(--finger-color) 65%,white);
+ border-bottom-color:color-mix(in srgb,var(--finger-color) 55%,#152131);
+ box-shadow:0 2px 1px #000b,inset 0 1px 1px #fff7;
+}
+#keyboard.finger-colors .key.unlearned{color:#344052}
+#keyboard.finger-colors .key.home-key::after{background:#18212d}
+#keyboard.finger-colors .key.target,#keyboard.finger-colors .key.shift-target{
+ outline:2px solid #fff;outline-offset:1px;
+ box-shadow:inset 0 0 0 2px #18212d,0 0 12px #fff9;
+}
+#keyboard.finger-colors .key.pressed{
+ filter:brightness(1.18);border-bottom-color:#18212d;
+ box-shadow:inset 0 0 0 2px #18212d,0 0 16px #fff9;
+}
+.finger-colors-help{text-align:left;font-size:12px}
+.finger-colors-help p{margin:10px 0}
+.finger-color-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin:12px 0 18px}
+.finger-color-legend span{display:flex;align-items:center;gap:8px;line-height:1.4}
+.finger-color-legend span::before{content:"";width:12px;height:12px;flex:none;background:var(--finger-color);border:1px solid #ffffff80;border-radius:3px}

@@ -1,0 +1,23 @@
+/* Whole dorsal hand textures; individual digits share one continuous deformable mesh. */
+.hands.connected-hands {
+  position:absolute; left:0; top:0; right:auto; bottom:auto;
+  width:760px; height:330px; z-index:3; pointer-events:none;
+  filter:drop-shadow(0 1px 2px rgba(208,223,255,.35));
+}
+.connected-hands .hand-surface,
+.connected-hands .hand-highlights {
+  display:block; position:absolute; inset:0;
+  width:760px; height:330px; pointer-events:none;
+}
+.connected-hands .hand-highlights { z-index:1; }
+@media(min-width:1051px) {
+  .monitor { height:calc(var(--game-vh) * 52); }
+  .keyboard-wrap { margin-top:calc(var(--game-vh) * 2); }
+}
+@media(max-height:760px) and (min-width:1051px) {
+  .monitor { height:calc(var(--game-vh) * 51); }
+  .keyboard-wrap { margin-top:calc(var(--game-vh) * 2.3); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .connected-hands { filter:none; }
+}
