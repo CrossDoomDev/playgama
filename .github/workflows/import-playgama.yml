@@ -1,0 +1,92 @@
+name: Import Playgama game archive
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - source-build.zip
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-news-editor-game
+  cancel-in-progress: false
+
+jobs:
+  import-game:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out migration repository
+        uses: actions/checkout@v4
+
+      - name: Safely unpack and verify game
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          root = Path.cwd().resolve()
+          archive = root / 'source-build.zip'
+          assert archive.is_file(), 'Please upload source-build.zip to repository root'
+          with ZipFile(archive) as z:
+              names = z.namelist()
+              assert len(names) < 3000, 'Unexpected number of game files'
+              assert sum(entry.file_size for entry in z.infolist()) < 200 * 1024 * 1024, 'Game is too large'
+              assert 'index.html' in names, 'index.html must be at ZIP root'
+              must = ('playgama-bridge-config.json','js/playgama-bridge.js','js/playgama-progress.js',
+                      'js/game.js','js/main.js','assets/audio/newsroom-night.mp3')
+              for required in must:
+                  assert required in names, 'Missing: ' + required
+              assert any(name.startswith('assets/icons/') and name.endswith('.webp') for name in names), 'No image assets'
+              assert 'js/yandex-sdk.js' not in names and 'js/yandex-progress.js' not in names, 'Old SDK must be removed'
+              for entry in z.infolist():
+                  path = (root / entry.filename).resolve()
+                  assert path == root or root in path.parents, 'Unsafe path: ' + entry.filename
+                  assert not entry.filename.startswith('.github/'), 'Archive cannot overwrite workflows'
+                  assert not (entry.external_attr >> 16) & 0o170000 == 0o120000, 'Symlinks forbidden'
+              for entry in z.infolist():
+                  if entry.is_dir():
+                      continue
+                  path = root / entry.filename
+                  path.parent.mkdir(parents=True,exist_ok=True)
+                  with z.open(entry) as src, path.open('wb') as dest:
+                      import shutil
+                      shutil.copyfileobj(src,dest)
+          archive.unlink()
+          print('Game files safely unpacked into repository root.')
+          PY
+
+      - name: Validate HTML5 source and Bridge
+        shell: bash
+        run: |
+          set -e
+          node --version
+          test -f index.html
+          node tests/bridge.test.cjs
+          find js data -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('index.html').read_text(encoding='utf-8')
+          assert 'bridge.playgama.com/v2/stable/playgama-bridge.js' in html
+          assert 'js/playgama-bridge.js' in html and 'js/playgama-progress.js' in html
+          assert 'js/yandex-sdk.js' not in html and 'js/yandex-progress.js' not in html
+          images=list(Path('assets').rglob('*.webp'))
+          assert len(images)>=30, f'Expected visual assets, got {len(images)}'
+          print('HTML5 build verified; assets:',len(images))
+          PY
+
+      - name: Import files to main branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to import"
+          else
+            git commit -m "Import News Editor with Playgama Bridge and optimized assets"
+            git push origin HEAD:main
+          fi
